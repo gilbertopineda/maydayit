@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
@@ -43,69 +44,51 @@
             },
         }
     </script>
-    <style>html {
-        scroll-behavior: smooth;
-    }
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24
-    }
-
-    .feature-card:hover .material-symbols-outlined {
-        font-variation-settings: 'FILL' 1;
-        transition: all 0.3s ease;
-    }
-
-    .angular-btn {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    .angular-btn:hover {
-        clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-    }
-
-    .tech-card {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .tech-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .clip-angular-left {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-    }
-
-    .clip-angular-right {
-        clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
-    }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-content-light dark:text-white font-display overflow-x-hidden selection:bg-primary selection:text-white">
-<div class="fixed top-0 left-0 w-full z-50 px-0 flex justify-center">
-    <nav class="bg-white/95 dark:bg-[#000B29]/95 backdrop-blur-md border-b-2 border-primary w-full px-6 py-4 shadow-sm flex items-center justify-between gap-8">
-        <a class="flex items-center gap-1 group" href="#">
-            <span class="font-black text-2xl tracking-tight text-primary">MAYDAY</span>
-            <span class="font-black text-2xl tracking-tight text-accent dark:text-white">!T</span>
-        </a>
-        <div class="hidden md:flex items-center gap-8">
-            <a class="text-sm font-bold uppercase tracking-wider hover:text-primary transition-colors" href="#services">Servicios</a>
-            <a class="text-sm font-bold uppercase tracking-wider hover:text-primary transition-colors"
-               href="#tech-stack">Tech</a>
-            <a class="text-sm font-bold uppercase tracking-wider hover:text-primary transition-colors" href="#projects">Casos
-                de Éxito</a>
-            <a class="text-sm font-bold uppercase tracking-wider hover:text-primary transition-colors" href="#contact">Contacto</a>
+<body class="bg-background-light dark:bg-background-dark text-content-light dark:text-white font-display overflow-x-hidden">
+<div class="fixed top-0 left-0 w-full z-50 flex justify-center">
+    <nav class="relative bg-white/95 dark:bg-[#000B29]/95 backdrop-blur-md border-b-2 border-primary w-full px-6 py-4 shadow-sm">
+        <div class="flex items-center justify-between gap-8">
+            <a class="flex items-center gap-1" href="#">
+                <span class="font-black text-2xl tracking-tight text-primary">MAYDAY</span>
+                <span class="font-black text-2xl tracking-tight text-accent dark:text-white">!T</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-bold uppercase tracking-wider hover:text-primary" href="#services">Servicios</a>
+                <a class="text-sm font-bold uppercase tracking-wider hover:text-primary" href="#tech-stack">Tech</a>
+                <a class="text-sm font-bold uppercase tracking-wider hover:text-primary" href="#projects">Casos de
+                    Éxito</a>
+                <a class="text-sm font-bold uppercase tracking-wider hover:text-primary" href="#contact">Contacto</a>
+            </div>
+            <a class="hidden sm:flex bg-accent hover:bg-primary text-white text-sm font-bold px-6 py-3 uppercase tracking-wider"
+               href="#contact">
+                Hablemos
+            </a>
+            <button id="menu-toggle" class="md:hidden text-content-light dark:text-white">
+                <span id="menu-icon" class="material-symbols-outlined text-3xl">menu</span>
+            </button>
         </div>
-        <a class="hidden sm:flex bg-accent hover:bg-primary text-white text-sm font-bold px-6 py-3 transition-all uppercase tracking-wider border-2 border-transparent hover:border-accent"
-           href="#contact">
-            Hablemos
-        </a>
-        <button class="md:hidden text-content-light dark:text-white">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
+        <div id="mobile-menu"
+             class="hidden absolute top-full left-0 w-full bg-white dark:bg-[#000B29] border-t border-primary">
+            <div class="flex flex-col gap-6 px-6 py-8 text-center">
+                <a href="#services" class="font-bold uppercase">Servicios</a>
+                <a href="#tech-stack" class="font-bold uppercase">Tech</a>
+                <a href="#projects" class="font-bold uppercase">Casos de Éxito</a>
+                <a href="#contact" class="font-bold uppercase">Contacto</a>
+            </div>
+        </div>
     </nav>
 </div>
 <section
@@ -552,5 +535,23 @@
         </p>
     </div>
 </footer>
+<script>
+    const toggleBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    toggleBtn.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.textContent = isOpen ? 'menu' : 'close';
+        document.body.classList.toggle('overflow-hidden', !isOpen);
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuIcon.textContent = 'menu';
+            document.body.classList.remove('overflow-hidden');
+        });
+    });
+</script>
 </body>
 </html>
