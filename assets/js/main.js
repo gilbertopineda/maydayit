@@ -139,6 +139,24 @@
         filter: filter,
         sortBy: sort
       });
+
+      if (isotopeItem.closest('.portfolio')) {
+        const centerSingleItemInLastRow = function(items) {
+          if (!items.length) return;
+
+          const lastItem = items[items.length - 1];
+          const containerWidth = initIsotope.size.innerWidth;
+          const itemWidth = lastItem.size.outerWidth;
+          const columns = Math.max(1, Math.round(containerWidth / itemWidth));
+
+          if (columns > 1 && items.length % columns === 1) {
+            lastItem.goTo((containerWidth - itemWidth) / 2, lastItem.position.y);
+          }
+        };
+
+        initIsotope.on('layoutComplete', centerSingleItemInLastRow);
+        centerSingleItemInLastRow(initIsotope.filteredItems);
+      }
     });
 
     isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
